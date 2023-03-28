@@ -11,6 +11,7 @@
     }
 
     startTime = Date.now()
+    timers.forEach((timer) => {timer.elapsed = false})
     timerInterval = window.setInterval(() => {
       const elapsedTime = Date.now() - startTime
       seconds = elapsedTime / 1000
@@ -66,6 +67,14 @@
     timers.splice(index, 1)
     timers = timers
   } 
+
+  const secondsToTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.round((seconds % 60) * 100) / 100;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`;
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
 </script>
 
 <svelte:head>
@@ -75,9 +84,8 @@
 
 <h1 class="text-3xl font-bold underline">Multi Timer</h1>
 
-<div>
-  <div class="text-4xl">{seconds}</div>
-  <span class="text-sm">seconds</span>
+<div class="mb-2">
+  <div class="text-4xl">{secondsToTime(seconds)}</div>
 </div>
 <button class="border px-2 bg-slate-300" on:click={startTimer}>Start</button>
 <button class="border px-2 bg-slate-300" on:click={stopTimer}>Stop</button>
