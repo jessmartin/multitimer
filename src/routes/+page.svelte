@@ -50,7 +50,7 @@
     time: number,
     elapsed: boolean
   }
-  let timers: Timer[] = [{time: 10, elapsed: false}]
+  let timers: Timer[] = [{time: 45, elapsed: false}, {time: 105, elapsed: false}, {time: 195, elapsed: false}]
 
   const addNewTimer = () => {
     const largestTime = timers.reduce((max, timer) => {
@@ -76,7 +76,7 @@
 <h1 class="text-3xl font-bold underline">Multi Timer</h1>
 
 <div>
-  <div class="text-3xl">{seconds}</div>
+  <div class="text-4xl">{seconds}</div>
   <span class="text-sm">seconds</span>
 </div>
 <button class="border px-2 bg-slate-300" on:click={startTimer}>Start</button>
