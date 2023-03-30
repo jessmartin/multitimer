@@ -10,8 +10,11 @@
       return
     }
 
+    // reset all of the timers
+    timers.forEach((timer) => timer.elapsed = false)
+    // set the start time to the current time
     startTime = Date.now()
-    timers.forEach((timer) => {timer.elapsed = false})
+    
     timerInterval = window.setInterval(() => {
       const elapsedTime = Date.now() - startTime
       seconds = elapsedTime / 1000
@@ -21,13 +24,11 @@
           return
         }
         if (seconds > timer.time) {
-          const sound = new Audio('/tickSound.m4a')
+          const sound = new Audio('/tickSound.mp3')
           sound.play()
           timer.elapsed = true
         }
       })
-
-      
     }, 10)
   }
   
@@ -37,6 +38,7 @@
     }
 
     clearInterval(timerInterval)
+    timerInterval = undefined
   }
 
   onMount(() => {
